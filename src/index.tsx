@@ -6,6 +6,7 @@ import { store } from './app/store';
 import App from './App';
 
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

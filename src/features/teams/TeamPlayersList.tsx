@@ -1,19 +1,21 @@
 import React from 'react';
 
+import ListGroup from 'react-bootstrap/ListGroup';
 import { IPlayer } from './interfaces';
 
 export interface ITeamPlayersListProps {
   items: IPlayer[];
+  className?: string;
 }
 
 export function TeamPlayersList(props: ITeamPlayersListProps) {
-  const { items = [] } = props;
+  const { items = [], ...rest } = props;
 
   return (
-    <ul>
+    <ListGroup {...rest}>
       {items.map(player => (
-        <li key={player.id}>{player.name}</li>
+        <ListGroup.Item key={player.id}>{player.name}</ListGroup.Item>
       ))}
-    </ul>
+    </ListGroup>
   );
 }

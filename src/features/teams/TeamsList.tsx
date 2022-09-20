@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { ITeam } from './interfaces';
 import { getTeamsAsync, selectIsLoading, selectTeams } from './teamsSlice';
 
+import Container from 'react-bootstrap/Container';
+import ListGroup from 'react-bootstrap/ListGroup';
 import { Preloader } from '../../components/Preloader';
 
 export interface ITeamsListProps {
@@ -12,16 +14,18 @@ export interface ITeamsListProps {
 }
 
 export function TeamsList(props: ITeamsListProps) {
-  const { items } = props;
+  const { items = [] } = props;
 
   return (
-    <ul>
+    <ListGroup>
       {items.map(item => (
-        <li key={item.id}>
-          <Link to={`/${item.id}`}>{item.name}</Link>
-        </li>
+        <Link key={item.id} to={`/${item.id}`}>
+          <ListGroup.Item>
+            {item.name}
+          </ListGroup.Item>
+        </Link>
       ))}
-    </ul>
+    </ListGroup>
   );
 }
 
@@ -39,6 +43,9 @@ export default function TeamsListContainer() {
   }
 
   return (
-    <TeamsList items={items} />
+    <Container className="py-3">
+      <h1>Teams</h1>
+      <TeamsList items={items} />
+    </Container>
   );
 }

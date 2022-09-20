@@ -5,6 +5,8 @@ import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { getTeamDetailsAsync, selectCurrentTeam, selectIsLoading } from "./teamsSlice";
 import { ITeamDetails } from "./interfaces";
 
+import Container from 'react-bootstrap/Container';
+import Image from "react-bootstrap/Image";
 import { TeamPlayersList } from "./TeamPlayersList";
 import { TeamMatchesList } from "./TeamMatchesList";
 import { Preloader } from "../../components/Preloader";
@@ -17,14 +19,14 @@ export function TeamDetails(props: ITeamDetailsProps) {
   const { team } = props;
 
   return (
-    <div>
-      <p>{team?.name}</p>
-      <img src={team?.crest} alt="Team Logo" />
-      <p>Players:</p>
-      <TeamPlayersList items={team?.squad} />
-      <p>Upcoming matches:</p>
+    <React.Fragment>
+      <h1>{team?.name}</h1>
+      <Image src={team?.crest} alt="Team Logo" className="d-block mx-auto mb-3" />
+      <h3>Players</h3>
+      <TeamPlayersList items={team?.squad} className="mb-3" />
+      <h3>Upcoming matches</h3>
       <TeamMatchesList items={team?.matches} teamId={team?.id} />
-    </div>
+    </React.Fragment>
   );
 }
 
@@ -46,6 +48,8 @@ export default function TeamDetailsContainer() {
   }
 
   return (
-    <TeamDetails team={team} />
+    <Container className="py-3">
+      <TeamDetails team={team} />
+    </Container>
   );
 }
